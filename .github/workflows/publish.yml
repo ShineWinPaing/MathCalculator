@@ -22,7 +22,7 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Pack MathCalculator
-        run: dotnet pack MathCalculator.csproj -c Release --no-dependencies -o .\nupkg
+        run: dotnet pack MathCalculator.csproj -c Release --no-dependencies -o ./nupkg
 
       - name: NuGet login (Trusted Publishing)
         uses: NuGet/login@v1
