@@ -30,4 +30,4 @@ jobs:
           user: SHINE_WIN_PAING
 
       - name: Push to NuGet.org
-        run: dotnet nuget push .\nupkg\*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ./nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
