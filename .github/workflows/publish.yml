@@ -1,3 +1,4 @@
+
 name: Publish MathCalculator to NuGet
 
 on:
@@ -12,6 +13,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,9 +27,14 @@ jobs:
         run: dotnet pack MathCalculator.csproj -c Release --no-dependencies -o ./nupkg
 
       - name: NuGet login (Trusted Publishing)
+        id: login
         uses: NuGet/login@v1
         with:
           user: SHINE_WIN_PAING
 
       - name: Push to NuGet.org
-        run: dotnet nuget push ./nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: |
+          dotnet nuget push ./nupkg/*.nupkg \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
